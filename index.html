@@ -439,6 +439,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
       <div class="mfield"><label>Taux TVA (%)</label><input type="number" id="f-tva-rate" min="0" step="0.5" placeholder="20"></div>
     </div>
     <div class="mfield"><label>Montant TVA (€)</label><input type="number" id="f-tva-montant" min="0" step="0.01" placeholder="calculé auto"></div>
+    <div id="extra-fields"></div>
     <div class="mfield">
       
       <div class="section-chooser">
@@ -597,12 +598,34 @@ function triggerCamera(){
   document.getElementById('photo-input').click();
 }
 
+function renderExtraFields(){
+  const container=document.getElementById('extra-fields');
+  if(!container)return;
+  const fieldLabels={
+    categorie:{label:'Catégorie',placeholder:'Carburant, Repas...'},
+    mode_paiement:{label:'Mode de paiement',placeholder:'CB, Espèces...'},
+    chantier:{label:'Chantier / Projet',placeholder:'Nom du chantier'},
+    salarie:{label:'Salarié',placeholder:'Nom du salarié'},
+    immatriculation:{label:'Immatriculation',placeholder:'AB-123-CD'},
+    kilometrage:{label:'Kilométrage',placeholder:'Ex: 45230'},
+    litres_gasoil:{label:'Litres de gasoil',placeholder:'Ex: 52.3'},
+    numero_ticket:{label:'Numéro de ticket',placeholder:'Référence'},
+  };
+  container.innerHTML=Object.keys(fieldLabels).filter(k=>userSettings[k]).map(k=>`
+    <div class="mfield">
+      <label>${fieldLabels[k].label}</label>
+      <input type="text" id="f-${k}" placeholder="${fieldLabels[k].placeholder}">
+    </div>
+  `).join('');
+}
+
 function resetModal(){
   document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
   ['f-desc','f-ht','f-tva-rate','f-tva-montant'].forEach(id=>{
     document.getElementById(id).value='';
     document.getElementById(id).classList.remove('ai-filled');
   });
+  renderExtraFields();
   document.getElementById('photo-preview').style.display='none';
   document.getElementById('pz-placeholder').style.display='block';
   document.getElementById('photo-input').value='';
@@ -652,10 +675,28 @@ async function analyzeWithAI(base64Image){
   document.getElementById('ai-analyzing').classList.add('visible');
   document.getElementById('ai-result').classList.remove('visible');
   const base64Data=base64Image.split(',')[1];
+  // Construire le prompt dynamique selon les paramètres activés
+  const extraFields = [];
+  const fieldDefs = {
+    categorie: 'categorie (ex: Carburant, Repas, Materiaux, Peage, Outillage)',
+    mode_paiement: 'mode_paiement (ex: CB, Especes, Virement)',
+    chantier: 'chantier (nom du chantier ou projet)',
+    salarie: 'salarie (nom du salarie)',
+    immatriculation: 'immatriculation (plaque du vehicule ex: AB-123-CD)',
+    kilometrage: 'kilometrage (nombre entier de km)',
+    litres_gasoil: 'litres_gasoil (quantite de carburant en litres, nombre decimal)',
+    numero_ticket: 'numero_ticket (reference ou numero du ticket)',
+  };
+  Object.keys(fieldDefs).forEach(k => {
+    if(userSettings[k]) extraFields.push('"'+k+'":'+fieldDefs[k]+' ou null');
+  });
+  const extraJSON = extraFields.length ? ','+extraFields.join(',') : '';
+  const extraExplain = extraFields.length ? 'Extrais aussi les champs supplémentaires demandés.' : '';
+
   const prompt=`Tu es un expert comptable français. Analyse cette image de ticket de caisse ou facture et extrais les données fiscales.
 Réponds UNIQUEMENT en JSON valide, sans texte avant ni après, sans backticks :
-{"fournisseur":"nom fournisseur ou type dépense","date":"YYYY-MM-DD ou null","montant_ht":nombre ou null,"taux_tva":20 ou 10 ou 5.5 ou 0 ou null,"montant_tva":nombre ou null,"montant_ttc":nombre ou null,"confiance":"high" ou "medium" ou "low"}
-Règles: si montant_tva absent mais HT et TTC présents, calcule montant_tva=TTC-HT. Si seulement TTC et taux, calcule HT=TTC/(1+taux/100) et TVA=TTC-HT. Mets null si illisible.`;
+{"fournisseur":"nom fournisseur ou type dépense","date":"YYYY-MM-DD ou null","montant_ht":nombre ou null,"taux_tva":20 ou 10 ou 5.5 ou 0 ou null,"montant_tva":nombre ou null,"montant_ttc":nombre ou null,"confiance":"high" ou "medium" ou "low"${extraJSON.replace(/"/g, '\"')}}
+Règles: si montant_tva absent mais HT et TTC présents, calcule montant_tva=TTC-HT. Si seulement TTC et taux, calcule HT=TTC/(1+taux/100) et TVA=TTC-HT. Mets null si illisible. ${extraExplain}`;
   try{
     const response=await fetch('/api/analyze',{
       method:'POST',
@@ -680,12 +721,19 @@ Règles: si montant_tva absent mais HT et TTC présents, calcule montant_tva=TTC
 
 function fillFromAI(data){
   document.getElementById('ai-analyzing').classList.remove('visible');
-  const set=(id,val)=>{if(val!==null&&val!==undefined&&val!==''){document.getElementById(id).value=val;document.getElementById(id).classList.add('ai-filled')}};
+  const set=(id,val)=>{
+    const el=document.getElementById(id);
+    if(el&&val!==null&&val!==undefined&&val!==''){el.value=val;el.classList.add('ai-filled')}
+  };
   set('f-desc',data.fournisseur);
   if(data.date)set('f-date',data.date);
   if(data.montant_ht!==null)set('f-ht',parseFloat(data.montant_ht).toFixed(2));
   if(data.taux_tva!==null)set('f-tva-rate',data.taux_tva);
   if(data.montant_tva!==null)set('f-tva-montant',parseFloat(data.montant_tva).toFixed(2));
+  // Champs supplémentaires
+  ['categorie','mode_paiement','chantier','salarie','immatriculation','kilometrage','litres_gasoil','numero_ticket'].forEach(k=>{
+    if(data[k]!==undefined&&data[k]!==null) set('f-'+k, data[k]);
+  });
   const r=document.getElementById('ai-result');
   r.classList.add('visible');r.style.cssText='';
   const conf=data.confiance||'medium';
@@ -712,12 +760,20 @@ async function saveTicket(){
   showLoading('Enregistrement…');
   closeModal();
 
+  // Collecter les champs supplémentaires
+  const extraData={};
+  ['categorie','mode_paiement','chantier','salarie','immatriculation','kilometrage','litres_gasoil','numero_ticket'].forEach(k=>{
+    const el=document.getElementById('f-'+k);
+    if(el&&el.value.trim())extraData[k]=el.value.trim();
+  });
+
   const ticketData={
     user_id:currentUser.id,
     description:desc,date,ht,tva,
     tva_rate:tvaRate,
     section:selectedSection,
-    photo_url:null
+    photo_url:null,
+    extra_data:Object.keys(extraData).length?JSON.stringify(extraData):null
   };
 
   const saved=await saveTicketToDB(ticketData);
