@@ -1011,6 +1011,85 @@ async function printYear(){
       </div>
     </div>`;
   });
+  // Générer section gasoil pour le PDF
+  const gasoilTickets=yt.filter(t=>{
+    if(!t.extra_data)return false;
+    try{const ex=JSON.parse(t.extra_data);return ex.litres_gasoil&&parseFloat(ex.litres_gasoil)>0}
+    catch(e){return false}
+  }).map(t=>{
+    const ex=JSON.parse(t.extra_data);
+    return{...t,litres:parseFloat(ex.litres_gasoil)||0,immat:ex.immatriculation||null,km:parseInt(ex.kilometrage)||null};
+  }).sort((a,b)=>a.date.localeCompare(b.date));
+
+  let gasoilHTML='';
+  if(gasoilTickets.length){
+    const totalLitres=gasoilTickets.reduce((s,t)=>s+t.litres,0);
+    const byImmat={};const sansImmat=[];
+    gasoilTickets.forEach(t=>{
+      if(t.immat){if(!byImmat[t.immat])byImmat[t.immat]=[];byImmat[t.immat].push(t);}
+      else sansImmat.push(t);
+    });
+
+    gasoilHTML+=`<div style="page-break-before:always">
+      <div class="rpt-photos-title" style="font-size:14px;margin-bottom:16px">⛽ Suivi Gasoil ${year}</div>
+      <div style="background:#FFF8E1;border:1px solid #FFE082;border-radius:8px;padding:14px 16px;margin-bottom:16px;display:flex;gap:32px">
+        <div><div style="font-size:22px;font-weight:700;color:#E65100">${totalLitres.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</div><div style="font-size:10px;color:#6B7280;text-transform:uppercase;font-weight:600">Total gasoil ${year}</div></div>
+        <div><div style="font-size:22px;font-weight:700;color:#1A1A2E">${gasoilTickets.length}</div><div style="font-size:10px;color:#6B7280;text-transform:uppercase;font-weight:600">Pleins effectués</div></div>
+      </div>`;
+
+    Object.keys(byImmat).sort().forEach(immat=>{
+      const ticks=byImmat[immat];
+      const totL=ticks.reduce((s,t)=>s+t.litres,0);
+      const kmValues=ticks.filter(t=>t.km).map(t=>t.km);
+      const kmMin=kmValues.length?Math.min(...kmValues):null;
+      const kmMax=kmValues.length?Math.max(...kmValues):null;
+      const rows=ticks.map(t=>`<tr>
+        <td>${new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR')}</td>
+        <td>${t.description}</td>
+        <td style="text-align:right">${t.litres.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</td>
+        <td style="text-align:right">${t.km?t.km.toLocaleString('fr-FR')+' km':'—'}</td>
+        <td style="text-align:right">${fmt(t.ht)} €</td>
+      </tr>`).join('');
+      gasoilHTML+=`<div style="margin-bottom:16px">
+        <div style="background:#1A1A2E;color:#fff;padding:8px 12px;border-radius:6px 6px 0 0;display:flex;justify-content:space-between">
+          <strong>🚗 ${immat}</strong>
+          <strong style="color:#52B788">${totL.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</strong>
+        </div>
+        ${kmMax?`<div style="background:#F0F2F5;padding:8px 12px;font-size:11px;display:flex;gap:20px">
+          <span>Km départ : <strong>${kmMin.toLocaleString('fr-FR')} km</strong></span>
+          <span>Km actuel : <strong style="color:#6C3FC5">${kmMax.toLocaleString('fr-FR')} km</strong></span>
+          <span>Distance : <strong>${(kmMax-kmMin).toLocaleString('fr-FR')} km</strong></span>
+        </div>`:''}
+        <table class="rpt-tickets-table">
+          <thead><tr><th>Date</th><th>Fournisseur</th><th style="text-align:right">Litres</th><th style="text-align:right">Kilométrage</th><th style="text-align:right">HT</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+    });
+
+    if(sansImmat.length){
+      const totL=sansImmat.reduce((s,t)=>s+t.litres,0);
+      const rows=sansImmat.map(t=>`<tr>
+        <td>${new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR')}</td>
+        <td>${t.description}</td>
+        <td style="text-align:right">${t.litres.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</td>
+        <td style="text-align:right">—</td>
+        <td style="text-align:right">${fmt(t.ht)} €</td>
+      </tr>`).join('');
+      gasoilHTML+=`<div style="margin-bottom:16px">
+        <div style="background:#1A1A2E;color:#fff;padding:8px 12px;border-radius:6px 6px 0 0;display:flex;justify-content:space-between">
+          <strong>⛽ Sans immatriculation</strong>
+          <strong style="color:#52B788">${totL.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</strong>
+        </div>
+        <table class="rpt-tickets-table">
+          <thead><tr><th>Date</th><th>Fournisseur</th><th style="text-align:right">Litres</th><th style="text-align:right">Kilométrage</th><th style="text-align:right">HT</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+    }
+    gasoilHTML+=`</div>`;
+  }
+
   const now=new Date().toLocaleDateString('fr-FR');
   document.getElementById('pv-title').textContent=`Rapport annuel ${year}`;
   document.getElementById('pv-content').innerHTML=`
@@ -1023,6 +1102,7 @@ async function printYear(){
       <div class="rpt-sum-box total"><div class="sv">${fmt(totHT)} €</div><div class="sl">Total HT</div></div>
     </div>
     ${monthsHTML}
+    ${gasoilHTML}
     <div class="rpt-footer">TVAtrack AI · Rapport annuel ${year} · Édité le ${now}</div>`;
   document.getElementById('print-view').classList.add('open');
   document.body.style.overflow='hidden';
