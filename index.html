@@ -392,7 +392,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
     <button class="btn-print-year" onclick="printYear()">📄 PDF année</button>
   </div>
   <div class="recap-annual">
-    <div><div class="ra-val recup" id="ra-recup">0,00 €</div><div class="ra-lbl">TVA récupérable</div></div>
+    <div><div class="ra-val recup" id="ra-recup">0,00 €</div><div class="ra-lbl">TVA</div></div>
 
     <div><div class="ra-val" id="ra-tickets">0</div><div class="ra-lbl">Tickets</div></div>
   </div>
@@ -400,7 +400,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
     <table>
       <thead><tr>
         <th>Mois</th><th>Tickets</th><th>Total HT</th>
-        <th>TVA Récup.</th><th style="text-align:center">PDF</th>
+        <th>TVA</th><th style="text-align:center">PDF</th>
       </tr></thead>
       <tbody id="recap-tbody"></tbody>
       <tfoot id="recap-tfoot"></tfoot>
@@ -863,12 +863,22 @@ function ticketHTML(t,section){
     ?`<img class="ticket-thumb" src="${t.signed_url}" onclick="openLightbox('${t.signed_url}')" alt="ticket">`
     :`<div class="ticket-thumb-placeholder">🧾</div>`;
   const dateStr=new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR');
+  // Champs extra
+  let extra='';
+  if(t.extra_data){
+    try{
+      const ex=JSON.parse(t.extra_data);
+      const labels={categorie:'Cat.',mode_paiement:'Paiem.',chantier:'Chantier',salarie:'Salarié',immatriculation:'Immat.',kilometrage:'Km',litres_gasoil:'Litres',numero_ticket:'N°'};
+      extra=Object.keys(ex).map(k=>`<span style="margin-right:6px">${labels[k]||k}: <strong>${ex[k]}</strong></span>`).join('');
+    }catch(e){}
+  }
   return`<div class="ticket-card ${section}">
     <button class="ticket-del" onclick="deleteTicket('${t.id}')">🗑</button>
     ${imgEl}
     <div class="ticket-info">
       <div class="t-desc">${t.description}</div>
       <div class="t-meta">${dateStr}${t.tva_rate?' · TVA '+t.tva_rate+'%':''}</div>
+      ${extra?`<div class="t-meta" style="margin-top:3px">${extra}</div>`:''}
     </div>
     <div class="ticket-amounts ${section}">
       <div class="t-ht">${fmt(t.ht)} € HT</div>
@@ -966,7 +976,7 @@ async function generateMonthPDF(key){
         <div class="rpt-photo-desc">${t.description}</div>
         <div>${new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR')}</div>
         <div class="rpt-photo-tva">TVA : ${fmt(t.tva)} €</div>
-        <span class="tag ${t.section}">${t.section==='recup'?'Récup.':'Due'}</span>
+        <span class="tag ${t.section}">${t.section==='recup'?'TVA':'Due'}</span>
       </div>
     </div>`).join('');
   const rowsHTML=concerned.map(t=>`
@@ -985,8 +995,8 @@ async function generateMonthPDF(key){
       <div class="rpt-meta"><strong>Dossier TVA — ${monthName}</strong>Édité le ${now} · ${concerned.length} tickets</div>
     </div>
     <div class="rpt-summary">
-      <div class="rpt-sum-box recup"><div class="sv">${fmt(totRecup)} €</div><div class="sl">TVA Récupérable</div></div>
-      <div class="rpt-sum-box due"><div class="sv">${fmt(totDue)} €</div><div class="sl">TVA Due à l'État</div></div>
+      <div class="rpt-sum-box recup"><div class="sv">${fmt(totRecup)} €</div><div class="sl">TVA</div></div>
+      <div class="rpt-sum-box due"><div class="sv">${fmt(totDue)} €</div><div class="sl">TVA</div></div>
       <div class="rpt-sum-box total"><div class="sv">${fmt(totHT)} €</div><div class="sl">Total HT</div></div>
     </div>
     <div style="margin-bottom:16px"><div class="rpt-photos-title">📷 Photos des tickets — ${monthName}</div>
@@ -998,7 +1008,7 @@ async function generateMonthPDF(key){
     </table>
     <div class="rpt-month-total-bar">
       <span>HT : <strong>${fmt(totHT)} €</strong></span>
-      <span class="mt-recup">Récup. : <strong>${fmt(totRecup)} €</strong></span>
+      <span class="mt-recup">TVA : <strong>${fmt(totRecup)} €</strong></span>
       <span class="mt-due">Due : <strong>${fmt(totDue)} €</strong></span>
       <span>TTC : <strong>${fmt(totTTC)} €</strong></span>
     </div></div>
@@ -1035,7 +1045,7 @@ async function printYear(){
     const rows=grp.map(t=>`<tr class="${t.section}-row">
       <td>${new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR')}</td>
       <td><strong>${t.description}</strong></td>
-      <td><span class="tag ${t.section}">${t.section==='recup'?'Récup.':'Due'}</span></td>
+      <td><span class="tag ${t.section}">${t.section==='recup'?'TVA':'Due'}</span></td>
       <td>${fmt(t.ht)} €</td><td>${t.tva_rate?t.tva_rate+'%':'—'}</td>
       <td><strong>${fmt(t.tva)} €</strong></td>
     </tr>`).join('');
@@ -1047,7 +1057,7 @@ async function printYear(){
       </table>
       <div class="rpt-month-total-bar">
         <span>HT : <strong>${fmt(mHT)} €</strong></span>
-        <span class="mt-recup">Récup. : <strong>${fmt(mR)} €</strong></span>
+        <span class="mt-recup">TVA : <strong>${fmt(mR)} €</strong></span>
         <span class="mt-due">Due : <strong>${fmt(mD)} €</strong></span>
       </div>
     </div>`;
@@ -1060,8 +1070,8 @@ async function printYear(){
       <div class="rpt-meta"><strong>Rapport TVA annuel ${year}</strong>Édité le ${now} · ${yt.length} tickets</div>
     </div>
     <div class="rpt-summary">
-      <div class="rpt-sum-box recup"><div class="sv">${fmt(totRecup)} €</div><div class="sl">TVA Récupérable</div></div>
-      <div class="rpt-sum-box due"><div class="sv">${fmt(totDue)} €</div><div class="sl">TVA Due à l'État</div></div>
+      <div class="rpt-sum-box recup"><div class="sv">${fmt(totRecup)} €</div><div class="sl">TVA</div></div>
+      <div class="rpt-sum-box due"><div class="sv">${fmt(totDue)} €</div><div class="sl">TVA</div></div>
       <div class="rpt-sum-box total"><div class="sv">${fmt(totHT)} €</div><div class="sl">Total HT</div></div>
     </div>
     ${monthsHTML}
