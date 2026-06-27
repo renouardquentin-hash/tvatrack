@@ -695,12 +695,9 @@ function fillFromAI(data){
 }
 
 function selectSection(s){
-  selectedSection=s;
-  document.getElementById('btn-recup').classList.toggle('selected',s==='recup');
-  document.getElementById('btn-due').classList.toggle('selected',s==='due');
+  selectedSection='recup';
   const btn=document.getElementById('btn-save');
-  btn.className='btn-save '+s;
-  btn.textContent=s==='recup'?'✓ Classer en TVA Récupérable':'✓ Classer en TVA Due à l\'État';
+  if(btn){btn.className='btn-save recup';btn.textContent='✓ Enregistrer le ticket';}
 }
 
 async function saveTicket(){
