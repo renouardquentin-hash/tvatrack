@@ -146,6 +146,21 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 .rpt-month-total-bar .mt-tva{color:#1A7F5A}
 .rpt-footer{margin-top:28px;padding-top:10px;border-top:1px solid #E5E7EB;font-size:10px;color:#9CA3AF;text-align:center}
 .rpt-extra{font-size:10px;color:#6B7280;margin-top:2px}
+.recap-section-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;margin-bottom:12px;color:var(--ink)}
+.gasoil-card{background:#fff;border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:12px}
+.gasoil-card-header{background:#1A1A2E;color:#fff;padding:10px 14px;font-size:13px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.gasoil-card-header .immat{font-family:'Space Grotesk',sans-serif;font-size:14px}
+.gasoil-card-header .total-litres{color:#52B788;font-size:14px;font-weight:700}
+.gasoil-table{width:100%;border-collapse:collapse}
+.gasoil-table th{background:#F9FAFB;padding:8px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)}
+.gasoil-table th:not(:first-child){text-align:right}
+.gasoil-table td{padding:9px 12px;font-size:12px;border-bottom:1px solid var(--border)}
+.gasoil-table tr:last-child td{border-bottom:none}
+.gasoil-table td:not(:first-child){text-align:right;font-weight:600}
+.gasoil-km{color:var(--ai);font-weight:700}
+.gasoil-global{background:#FFF8E1;border:1px solid #FFE082;border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+.gasoil-global .g-val{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;color:#E65100}
+.gasoil-global .g-lbl{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
 @media print{
   body > *:not(#print-view){display:none!important}
   #print-view{display:block!important;position:static;padding:16px;z-index:auto}
@@ -310,6 +325,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
       <tbody id="recap-tbody"></tbody>
       <tfoot id="recap-tfoot"></tfoot>
     </table>
+  </div>
+  <!-- SECTION GASOIL -->
+  <div id="gasoil-section" style="margin-top:20px;display:none">
+    <div class="recap-section-title">⛽ Suivi Gasoil</div>
+    <div id="gasoil-content"></div>
   </div>
 </div>
 
@@ -773,6 +793,110 @@ function renderRecap(){
   }
   tbody.innerHTML=rows;
   tfoot.innerHTML=`<tr><td>Total ${year}</td><td>${totN}</td><td>${fmt(totHT)} €</td><td style="color:var(--recup)">${fmt(totT)} €</td><td></td></tr>`;
+  // Afficher section gasoil si paramètre activé
+  renderGasoil(year);
+}
+
+// SUIVI GASOIL
+function renderGasoil(year){
+  const section=document.getElementById('gasoil-section');
+  const container=document.getElementById('gasoil-content');
+  if(!section||!container)return;
+
+  // Filtrer tickets avec litres_gasoil sur l'année
+  const gasoilTickets=tickets.filter(t=>{
+    if(new Date(t.date+'T00:00:00').getFullYear()!==year)return false;
+    if(!t.extra_data)return false;
+    try{const ex=JSON.parse(t.extra_data);return ex.litres_gasoil&&parseFloat(ex.litres_gasoil)>0}
+    catch(e){return false}
+  }).map(t=>{
+    const ex=JSON.parse(t.extra_data);
+    return{...t,litres:parseFloat(ex.litres_gasoil)||0,immat:ex.immatriculation||null,km:parseInt(ex.kilometrage)||null};
+  }).sort((a,b)=>a.date.localeCompare(b.date));
+
+  if(!gasoilTickets.length){section.style.display='none';return}
+  section.style.display='block';
+
+  const totalLitres=gasoilTickets.reduce((s,t)=>s+t.litres,0);
+
+  // Grouper par immatriculation
+  const byImmat={};
+  const sansImmat=[];
+  gasoilTickets.forEach(t=>{
+    if(t.immat){
+      if(!byImmat[t.immat])byImmat[t.immat]=[];
+      byImmat[t.immat].push(t);
+    } else {
+      sansImmat.push(t);
+    }
+  });
+
+  let html=`
+    <div class="gasoil-global">
+      <div>
+        <div class="g-val">${totalLitres.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</div>
+        <div class="g-lbl">Total gasoil ${year}</div>
+      </div>
+      <div style="text-align:right">
+        <div class="g-val" style="font-size:16px">${gasoilTickets.length}</div>
+        <div class="g-lbl">Pleins effectués</div>
+      </div>
+    </div>`;
+
+  // Cartes par immatriculation
+  Object.keys(byImmat).sort().forEach(immat=>{
+    const ticks=byImmat[immat];
+    const totL=ticks.reduce((s,t)=>s+t.litres,0);
+    const kmValues=ticks.filter(t=>t.km).map(t=>t.km);
+    const kmMin=kmValues.length?Math.min(...kmValues):null;
+    const kmMax=kmValues.length?Math.max(...kmValues):null;
+    const rows=ticks.map(t=>`<tr>
+      <td>${new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR')}</td>
+      <td>${t.description}</td>
+      <td>${t.litres.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</td>
+      <td>${t.km?t.km.toLocaleString('fr-FR')+' km':'—'}</td>
+      <td>${fmt(t.ht)} €</td>
+    </tr>`).join('');
+    html+=`<div class="gasoil-card">
+      <div class="gasoil-card-header">
+        <span class="immat">🚗 ${immat}</span>
+        <span class="total-litres">${totL.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</span>
+      </div>
+      ${kmMax?`<div style="padding:8px 14px;background:#F0F2F5;font-size:12px;display:flex;gap:20px">
+        <span>📍 Km départ : <strong>${kmMin.toLocaleString('fr-FR')} km</strong></span>
+        <span>📍 Km actuel : <strong class="gasoil-km">${kmMax.toLocaleString('fr-FR')} km</strong></span>
+        <span>📏 Distance : <strong>${(kmMax-kmMin).toLocaleString('fr-FR')} km</strong></span>
+      </div>`:''}
+      <table class="gasoil-table">
+        <thead><tr><th>Date</th><th>Fournisseur</th><th>Litres</th><th>Kilométrage</th><th>Montant HT</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  });
+
+  // Tickets sans immatriculation
+  if(sansImmat.length){
+    const totL=sansImmat.reduce((s,t)=>s+t.litres,0);
+    const rows=sansImmat.map(t=>`<tr>
+      <td>${new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR')}</td>
+      <td>${t.description}</td>
+      <td>${t.litres.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</td>
+      <td>—</td>
+      <td>${fmt(t.ht)} €</td>
+    </tr>`).join('');
+    html+=`<div class="gasoil-card">
+      <div class="gasoil-card-header">
+        <span class="immat">⛽ Sans immatriculation</span>
+        <span class="total-litres">${totL.toLocaleString('fr-FR',{minimumFractionDigits:1,maximumFractionDigits:1})} L</span>
+      </div>
+      <table class="gasoil-table">
+        <thead><tr><th>Date</th><th>Fournisseur</th><th>Litres</th><th>Kilométrage</th><th>Montant HT</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  }
+
+  container.innerHTML=html;
 }
 
 // PDF MOIS
