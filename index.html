@@ -16,8 +16,6 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;padding-bottom:90px}
-
-/* LOGIN */
 .login-screen{display:none;position:fixed;inset:0;background:var(--ink);z-index:9999;align-items:center;justify-content:center;padding:24px}
 .login-screen.open{display:flex}
 .login-box{background:#fff;border-radius:20px;padding:32px 28px;width:100%;max-width:400px;text-align:center}
@@ -35,8 +33,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 .login-btn:hover{opacity:.9}
 .login-error{background:#FEE2E2;border:1px solid #FCA5A5;border-radius:8px;padding:10px;font-size:12px;color:#991B1B;margin-bottom:12px;display:none}
 .login-error.show{display:block}
-
-/* NAV */
 .nav{background:var(--ink);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:200}
 .nav-logo{font-family:'Space Grotesk',sans-serif;font-size:18px;color:#fff;display:flex;align-items:center;gap:8px}
 .nav-logo em{color:#52B788;font-style:normal}
@@ -45,98 +41,23 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 .nav-tabs{display:flex;gap:4px;background:rgba(255,255,255,.1);padding:4px;border-radius:10px}
 .nav-tab{padding:5px 12px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,.6);transition:all .15s}
 .nav-tab.active{background:#fff;color:var(--ink)}
-.nav-user{font-size:11px;color:rgba(255,255,255,.5);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .btn-logout{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif}
 .btn-logout:hover{background:rgba(255,255,255,.1);color:#fff}
-
-/* PAGES */
 .page{display:none;padding:16px;max-width:960px;margin:0 auto}
 .page.active{display:block}
-
-/* STATS */
-.stats-bar{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
-.stat-card{background:#fff;border-radius:var(--radius);padding:12px;box-shadow:var(--shadow-sm);text-align:center}
-.stat-card .val{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700}
-.stat-card .lbl{font-size:10px;color:var(--muted);margin-top:2px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.stat-card.recup .val{color:var(--recup)}
-.stat-card.due .val{color:var(--due)}
-
-/* FILTRE ANNEE */
-.year-filter{display:flex;align-items:center;gap:10px;margin-bottom:14px;background:#fff;padding:10px 14px;border-radius:var(--radius);box-shadow:var(--shadow-sm);flex-wrap:wrap}
-.year-filter label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.year-tabs{display:flex;gap:6px;flex-wrap:wrap;flex:1}
-.year-tab{padding:4px 12px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);transition:all .15s}
-.year-tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-
-/* COLUMNS */
-.columns{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:600px){.columns{grid-template-columns:1fr}}
-.col-header{border-radius:var(--radius) var(--radius) 0 0;padding:12px 16px;display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700}
-.col-header.recup{background:var(--recup);color:#fff}
-.col-header.due{background:var(--due);color:#fff}
-.col-header .badge{margin-left:auto;background:rgba(255,255,255,.25);padding:2px 9px;border-radius:20px;font-size:12px}
-.col-body{background:#fff;border-radius:0 0 var(--radius) var(--radius);border:1px solid var(--border);border-top:none;min-height:160px}
-
-/* MONTH GROUP */
-.month-group{border-bottom:1px solid var(--border)}
-.month-group:last-child{border-bottom:none}
-.month-toggle{width:100%;background:none;border:none;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--ink)}
-.month-toggle:hover{background:#F9FAFB}
-.month-toggle .m-left{display:flex;align-items:center;gap:7px}
-.month-toggle .m-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.month-toggle.recup .m-dot{background:var(--recup)}
-.month-toggle.due .m-dot{background:var(--due)}
-.month-toggle .m-count{color:var(--muted);font-weight:400;font-size:11px}
-.month-toggle .m-right{display:flex;align-items:center;gap:6px}
-.month-toggle .m-total{font-size:12px;font-weight:700}
-.month-toggle.recup .m-total{color:var(--recup)}
-.month-toggle.due .m-total{color:var(--due)}
-.month-toggle .m-arrow{font-size:9px;color:var(--muted);transition:transform .2s}
-.month-toggle.open .m-arrow{transform:rotate(180deg)}
-.month-tickets{display:none;padding:0 8px 8px}
-.month-tickets.open{display:block}
-.btn-month-pdf{background:none;border:1px solid var(--border);border-radius:6px;padding:3px 7px;font-size:10px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif}
-.btn-month-pdf:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-
-/* TICKET CARD */
-.ticket-card{border-radius:10px;padding:9px;margin-bottom:6px;display:flex;align-items:flex-start;gap:9px;position:relative;border:1px solid transparent}
-.ticket-card.recup{background:var(--recup-light);border-color:#C3E8D9}
-.ticket-card.due{background:var(--due-light);border-color:#F5C6C2}
-.ticket-thumb{width:42px;height:42px;border-radius:7px;object-fit:cover;flex-shrink:0;cursor:pointer;border:2px solid rgba(0,0,0,.08)}
-.ticket-thumb-placeholder{width:42px;height:42px;border-radius:7px;background:rgba(0,0,0,.06);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px}
-.ticket-info{flex:1;min-width:0}
-.ticket-info .t-desc{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ticket-info .t-meta{font-size:10px;color:var(--muted);margin-top:2px}
-.ticket-amounts{text-align:right;flex-shrink:0}
-.ticket-amounts .t-ht{font-size:10px;color:var(--muted)}
-.ticket-amounts .t-tva{font-size:12px;font-weight:700}
-.ticket-amounts.recup .t-tva{color:var(--recup)}
-.ticket-amounts.due .t-tva{color:var(--due)}
-.ticket-del{position:absolute;top:5px;right:5px;background:none;border:none;font-size:12px;cursor:pointer;opacity:.3;padding:2px;line-height:1}
-.ticket-del:hover{opacity:1}
-.empty-col{padding:24px 14px;text-align:center;color:var(--muted);font-size:13px}
-.empty-col .e-icon{font-size:26px;margin-bottom:6px}
-
-/* LOADING */
 .loading-overlay{display:none;position:fixed;inset:0;background:rgba(26,26,46,.7);z-index:800;align-items:center;justify-content:center;flex-direction:column;gap:14px}
 .loading-overlay.open{display:flex}
 .loading-spinner{width:44px;height:44px;border:4px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
 .loading-text{color:#fff;font-size:14px;font-weight:600}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* FAB */
 .fab{position:fixed;bottom:24px;right:24px;width:62px;height:62px;border-radius:50%;background:var(--ai);color:#fff;font-size:26px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(108,63,197,.4);display:flex;align-items:center;justify-content:center;z-index:150;transition:transform .15s}
 .fab:hover{transform:scale(1.08)}
-
-/* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;align-items:flex-end;justify-content:center}
 .modal-bg.open{display:flex}
 .modal{background:#fff;border-radius:24px 24px 0 0;padding:22px 18px 34px;width:100%;max-width:540px;animation:slideUp .22s ease;max-height:95vh;overflow-y:auto}
 @keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
 .modal-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
 .modal-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted)}
-
-/* PHOTO */
 .photo-zone{border:2px dashed var(--border);border-radius:12px;padding:22px 14px;text-align:center;cursor:pointer;margin-bottom:12px;position:relative;background:#FAFAFA;transition:border-color .15s}
 .photo-zone:hover{border-color:var(--ai)}
 .photo-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
@@ -144,8 +65,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 .photo-zone .pz-text{font-size:13px;color:var(--muted)}
 .photo-zone .pz-sub{font-size:11px;color:var(--ai);font-weight:600;margin-top:3px}
 .photo-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;display:none;margin-bottom:12px;border:2px solid var(--border)}
-
-/* AI */
 .ai-analyzing{display:none;background:var(--ai-light);border:1.5px solid #C9B5F0;border-radius:12px;padding:18px;margin-bottom:12px;text-align:center}
 .ai-analyzing.visible{display:block}
 .ai-spinner{width:28px;height:28px;border:3px solid #C9B5F0;border-top-color:var(--ai);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 8px}
@@ -153,36 +72,21 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 .ai-analyzing small{font-size:11px;color:var(--muted)}
 .ai-result{display:none;background:var(--ai-light);border:1.5px solid #C9B5F0;border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:var(--ai);font-weight:500}
 .ai-result.visible{display:flex;align-items:center;gap:8px}
-
-/* FORM */
 .mfield{margin-bottom:10px}
 .mfield label{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .mfield input,.mfield select{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;color:var(--ink);background:#FAFAF8;outline:none;transition:border-color .15s}
 .mfield input:focus,.mfield select:focus{border-color:var(--ai);background:#fff}
 .mfield input.ai-filled{border-color:var(--ai);background:var(--ai-light)}
 .mrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.section-chooser{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.section-btn{padding:12px;border-radius:12px;border:2px solid var(--border);cursor:pointer;background:#fff;text-align:center;transition:all .15s;font-family:'Inter',sans-serif}
-.section-btn .sb-icon{font-size:20px;margin-bottom:3px}
-.section-btn .sb-label{font-size:12px;font-weight:700;display:block}
-.section-btn .sb-sub{font-size:10px;color:var(--muted)}
-.section-btn.recup.selected{border-color:var(--recup);background:var(--recup-light)}
-.section-btn.due.selected{border-color:var(--due);background:var(--due-light)}
-.btn-save{width:100%;padding:13px;border-radius:12px;border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;color:#fff}
-.btn-save.recup{background:var(--recup)}
-.btn-save.due{background:var(--due)}
-
-/* RECAP */
+.btn-save{width:100%;padding:13px;border-radius:12px;border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;cursor:pointer;color:#fff;background:var(--ai)}
 .recap-controls{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .recap-controls label{font-size:13px;font-weight:600;color:var(--muted)}
 .recap-controls select{padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);font-size:14px;font-family:'Inter',sans-serif;background:#fff}
 .btn-print-year{display:flex;align-items:center;gap:6px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--border);background:#fff;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer;color:var(--ink);transition:all .15s;margin-left:auto}
 .btn-print-year:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-.recap-annual{background:var(--ink);color:#fff;border-radius:var(--radius);padding:18px 20px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;text-align:center}
+.recap-annual{background:var(--ink);color:#fff;border-radius:var(--radius);padding:18px 20px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:center}
 .recap-annual .ra-val{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700}
 .recap-annual .ra-lbl{font-size:10px;opacity:.6;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
-.recap-annual .ra-val.recup{color:var(--recup-mid)}
-.recap-annual .ra-val.due{color:var(--due-mid)}
 .recap-table{background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-sm)}
 .recap-table table{width:100%;border-collapse:collapse}
 .recap-table thead th{background:#F9FAFB;padding:10px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)}
@@ -190,32 +94,21 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 .recap-table tbody td{padding:11px 12px;font-size:12px;border-bottom:1px solid var(--border)}
 .recap-table tbody tr:last-child td{border-bottom:none}
 .recap-table tbody td:not(:first-child){text-align:right;font-weight:600}
-.recap-table tbody td.recup{color:var(--recup)}
-.recap-table tbody td.due{color:var(--due)}
+.recap-table tbody td.tva-col{color:var(--recup)}
 .recap-table tbody td.month-name{font-weight:600}
 .recap-table tbody td.pdf-cell{text-align:center}
 .recap-table tfoot td{padding:12px;font-size:12px;font-weight:700;background:#F9FAFB;border-top:2px solid var(--border)}
 .recap-table tfoot td:not(:first-child){text-align:right}
-.recap-table tfoot td.recup{color:var(--recup)}
-.recap-table tfoot td.due{color:var(--due)}
-
-/* LIGHTBOX */
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:500;align-items:center;justify-content:center}
 .lightbox.open{display:flex}
 .lightbox img{max-width:92vw;max-height:90vh;border-radius:8px}
 .lightbox-close{position:absolute;top:18px;right:18px;color:#fff;font-size:30px;cursor:pointer;background:none;border:none}
-
-/* TOAST */
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 20px;border-radius:24px;font-size:13px;font-weight:500;opacity:0;transition:all .3s;z-index:400;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* CONFIDENCE */
 .confidence-tag{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px}
 .confidence-tag.high{background:#D1FAE5;color:#065F46}
 .confidence-tag.medium{background:#FEF3C7;color:#92400E}
 .confidence-tag.low{background:#FEE2E2;color:#991B1B}
-
-/* IMPRESSION */
 #print-view{display:none;position:fixed;inset:0;background:#fff;z-index:9999;overflow-y:auto;padding:28px;font-family:Arial,sans-serif;font-size:12px;color:#1A1A2E}
 #print-view.open{display:block}
 .pv-toolbar{display:flex;gap:10px;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid #E5E7EB;flex-wrap:wrap;align-items:center}
@@ -229,14 +122,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 .rpt-logo em{color:#1A7F5A;font-style:normal}
 .rpt-meta{text-align:right;font-size:12px;color:#6B7280}
 .rpt-meta strong{display:block;font-size:15px;color:#1A1A2E;margin-bottom:2px}
-.rpt-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+.rpt-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
 .rpt-sum-box{border-radius:8px;padding:12px;text-align:center}
-.rpt-sum-box.recup{background:#E8F5F0;border:1px solid #C3E8D9}
-.rpt-sum-box.due{background:#FDF0EF;border:1px solid #F5C6C2}
+.rpt-sum-box.tva{background:#E8F5F0;border:1px solid #C3E8D9}
 .rpt-sum-box.total{background:#F0F2F5;border:1px solid #E5E7EB}
 .rpt-sum-box .sv{font-size:18px;font-weight:700}
-.rpt-sum-box.recup .sv{color:#1A7F5A}
-.rpt-sum-box.due .sv{color:#C0392B}
+.rpt-sum-box.tva .sv{color:#1A7F5A}
 .rpt-sum-box .sl{font-size:10px;color:#6B7280;margin-top:2px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .rpt-photos-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#6B7280;margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #E5E7EB}
 .rpt-photos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
@@ -244,24 +135,17 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 .rpt-photo-item img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
 .rpt-photo-item .rpt-photo-meta{padding:5px 7px;font-size:9px;color:#6B7280;line-height:1.4}
 .rpt-photo-item .rpt-photo-desc{font-weight:700;color:#1A1A2E;font-size:10px}
-.rpt-photo-item .rpt-photo-tva{font-weight:700;font-size:10px}
-.rpt-photo-item.recup .rpt-photo-tva{color:#1A7F5A}
-.rpt-photo-item.due .rpt-photo-tva{color:#C0392B}
+.rpt-photo-item .rpt-photo-tva{font-weight:700;font-size:10px;color:#1A7F5A}
 .rpt-photo-noimg{width:100%;aspect-ratio:3/4;background:#F3F4F6;display:flex;align-items:center;justify-content:center;font-size:24px}
 .rpt-tickets-table{width:100%;border-collapse:collapse}
 .rpt-tickets-table th{background:#1A1A2E;color:#fff;padding:7px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
 .rpt-tickets-table th:not(:nth-child(1)):not(:nth-child(2)){text-align:right}
 .rpt-tickets-table td{padding:7px 10px;font-size:11px;border-bottom:1px solid #F3F4F6}
 .rpt-tickets-table td:not(:nth-child(1)):not(:nth-child(2)){text-align:right}
-.rpt-tickets-table tr.recup-row td{background:#F8FDFB}
-.rpt-tickets-table tr.due-row td{background:#FDFAF9}
-.tag{display:inline-block;padding:1px 6px;border-radius:10px;font-size:9px;font-weight:700;text-transform:uppercase}
-.tag.recup{background:#D1FAE5;color:#065F46}
-.tag.due{background:#FEE2E2;color:#991B1B}
 .rpt-month-total-bar{background:#F9FAFB;border-top:2px solid #E5E7EB;display:flex;justify-content:flex-end;gap:20px;padding:8px 12px;font-size:11px;font-weight:700}
-.rpt-month-total-bar .mt-recup{color:#1A7F5A}
-.rpt-month-total-bar .mt-due{color:#C0392B}
+.rpt-month-total-bar .mt-tva{color:#1A7F5A}
 .rpt-footer{margin-top:28px;padding-top:10px;border-top:1px solid #E5E7EB;font-size:10px;color:#9CA3AF;text-align:center}
+.rpt-extra{font-size:10px;color:#6B7280;margin-top:2px}
 @media print{
   body > *:not(#print-view){display:none!important}
   #print-view{display:block!important;position:static;padding:16px;z-index:auto}
@@ -269,30 +153,19 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
   img{max-width:100%!important;page-break-inside:avoid}
   .rpt-photo-item{page-break-inside:avoid}
 }
-
-/* ACTION PAGE */
 .action-page{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 60px);padding:24px;text-align:center}
 .action-logo{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:800;color:var(--ink);margin-bottom:6px}
 .action-logo em{color:#1A7F5A;font-style:normal}
 .action-subtitle{font-size:14px;color:var(--muted);margin-bottom:40px;font-weight:500}
-.action-buttons{display:flex;flex-direction:column;gap:16px;width:100%;max-width:320px;margin-bottom:40px}
+.action-buttons{display:flex;flex-direction:column;gap:16px;width:100%;max-width:320px}
 .action-btn{border:none;border-radius:20px;padding:28px 24px;cursor:pointer;transition:all .2s;text-align:center;font-family:'Inter',sans-serif;width:100%}
 .action-btn.scan{background:var(--ink);color:#fff;box-shadow:0 8px 32px rgba(26,26,46,.25)}
 .action-btn.scan:hover{transform:translateY(-2px)}
-.action-btn.settings{background:#fff;color:var(--ink);border:2px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.action-btn.settings{background:#fff;color:var(--ink);border:2px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.08);margin-top:0}
 .action-btn.settings:hover{transform:translateY(-2px);border-color:var(--ink)}
 .action-btn-icon{font-size:40px;margin-bottom:10px}
 .action-btn-label{font-size:18px;font-weight:700;margin-bottom:4px}
 .action-btn-sub{font-size:12px;opacity:.7}
-.action-stats{display:flex;align-items:center;gap:16px;background:#fff;padding:16px 24px;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid var(--border)}
-.action-stat{text-align:center}
-.action-stat-val{display:block;font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--ink)}
-.action-stat-val.recup{color:var(--recup)}
-.action-stat-val.due{color:var(--due)}
-.action-stat-lbl{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.action-stat-sep{width:1px;height:36px;background:var(--border)}
-
-/* SETTINGS PAGE */
 .settings-header{display:flex;align-items:center;gap:14px;margin-bottom:20px}
 .settings-back{background:none;border:none;font-size:14px;font-weight:600;color:var(--ai);cursor:pointer;font-family:'Inter',sans-serif;padding:0}
 .settings-title{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700}
@@ -312,11 +185,41 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 .toggle-switch input:checked + .toggle-slider{background:var(--ai)}
 .toggle-switch input:checked + .toggle-slider::before{transform:translateX(22px)}
 .settings-save-btn{width:100%;padding:14px;border-radius:12px;border:none;background:var(--ai);color:#fff;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;cursor:pointer}
+.ticket-card{border-radius:10px;padding:9px;margin-bottom:6px;display:flex;align-items:flex-start;gap:9px;position:relative;border:1px solid #C3E8D9;background:var(--recup-light)}
+.ticket-thumb{width:42px;height:42px;border-radius:7px;object-fit:cover;flex-shrink:0;cursor:pointer;border:2px solid rgba(0,0,0,.08)}
+.ticket-thumb-placeholder{width:42px;height:42px;border-radius:7px;background:rgba(0,0,0,.06);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px}
+.ticket-info{flex:1;min-width:0}
+.ticket-info .t-desc{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ticket-info .t-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.ticket-amounts{text-align:right;flex-shrink:0}
+.ticket-amounts .t-ht{font-size:10px;color:var(--muted)}
+.ticket-amounts .t-tva{font-size:12px;font-weight:700;color:var(--recup)}
+.ticket-del{position:absolute;top:5px;right:5px;background:none;border:none;font-size:12px;cursor:pointer;opacity:.3;padding:2px;line-height:1}
+.ticket-del:hover{opacity:1}
+.month-group{border-bottom:1px solid var(--border)}
+.month-group:last-child{border-bottom:none}
+.month-toggle{width:100%;background:none;border:none;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:var(--ink)}
+.month-toggle:hover{background:#F9FAFB}
+.month-toggle .m-left{display:flex;align-items:center;gap:7px}
+.month-toggle .m-dot{width:7px;height:7px;border-radius:50%;background:var(--recup);flex-shrink:0}
+.month-toggle .m-count{color:var(--muted);font-weight:400;font-size:11px}
+.month-toggle .m-right{display:flex;align-items:center;gap:6px}
+.month-toggle .m-total{font-size:12px;font-weight:700;color:var(--recup)}
+.month-toggle .m-arrow{font-size:9px;color:var(--muted);transition:transform .2s}
+.month-toggle.open .m-arrow{transform:rotate(180deg)}
+.month-tickets{display:none;padding:0 8px 8px}
+.month-tickets.open{display:block}
+.btn-month-pdf{background:none;border:1px solid var(--border);border-radius:6px;padding:3px 7px;font-size:10px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;font-family:'Inter',sans-serif}
+.btn-month-pdf:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.empty-col{padding:24px 14px;text-align:center;color:var(--muted);font-size:13px}
+.empty-col .e-icon{font-size:26px;margin-bottom:6px}
+.col-tickets{background:#fff;border-radius:var(--radius);border:1px solid var(--border);min-height:160px;margin-top:16px}
+.col-header-bar{border-radius:var(--radius) var(--radius) 0 0;padding:12px 16px;display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;background:var(--recup);color:#fff}
+.col-header-bar .badge{margin-left:auto;background:rgba(255,255,255,.25);padding:2px 9px;border-radius:20px;font-size:12px}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div class="login-screen open" id="login-screen">
   <div class="login-box">
     <div class="login-logo">TVA<em>track</em></div>
@@ -332,13 +235,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
   </div>
 </div>
 
-<!-- LOADING -->
 <div class="loading-overlay" id="loading-overlay">
   <div class="loading-spinner"></div>
   <div class="loading-text" id="loading-text">Chargement…</div>
 </div>
 
-<!-- NAV -->
 <nav class="nav">
   <div class="nav-logo">TVA<em>track</em> <span class="ai-badge">IA</span></div>
   <div class="nav-right">
@@ -368,6 +269,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
       </button>
     </div>
   </div>
+  <div style="padding:0 16px 16px;max-width:600px;margin:0 auto">
+    <div class="col-header-bar">🧾 Mes tickets <span class="badge" id="badge-tickets">0</span></div>
+    <div class="col-tickets" id="col-tickets">
+      <div class="empty-col" id="empty-tickets"><div class="e-icon">📷</div>Photographiez un ticket,<br>l'IA lit tout automatiquement.</div>
+    </div>
+  </div>
 </div>
 
 <!-- PAGE SETTINGS -->
@@ -392,15 +299,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
     <button class="btn-print-year" onclick="printYear()">📄 PDF année</button>
   </div>
   <div class="recap-annual">
-    <div><div class="ra-val recup" id="ra-recup">0,00 €</div><div class="ra-lbl">TVA</div></div>
-
+    <div><div class="ra-val" id="ra-tva" style="color:#52B788">0,00 €</div><div class="ra-lbl">Total TVA</div></div>
     <div><div class="ra-val" id="ra-tickets">0</div><div class="ra-lbl">Tickets</div></div>
   </div>
   <div class="recap-table">
     <table>
       <thead><tr>
-        <th>Mois</th><th>Tickets</th><th>Total HT</th>
-        <th>TVA</th><th style="text-align:center">PDF</th>
+        <th>Mois</th><th>Tickets</th><th>Total HT</th><th>TVA</th><th style="text-align:center">PDF</th>
       </tr></thead>
       <tbody id="recap-tbody"></tbody>
       <tfoot id="recap-tfoot"></tfoot>
@@ -408,10 +313,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
   </div>
 </div>
 
-<!-- FAB -->
 <button class="fab" onclick="triggerCamera()">📷</button>
 
-<!-- MODAL -->
 <div class="modal-bg" id="modal-bg" onclick="closeModalBg(event)">
   <div class="modal">
     <div class="modal-title">Nouveau ticket <button class="modal-close" onclick="closeModal()">✕</button></div>
@@ -440,26 +343,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
     </div>
     <div class="mfield"><label>Montant TVA (€)</label><input type="number" id="f-tva-montant" min="0" step="0.01" placeholder="calculé auto"></div>
     <div id="extra-fields"></div>
-    <div class="mfield">
-      
-      <div class="section-chooser">
-        <div class="section-btn recup selected" id="btn-recup" onclick="selectSection('recup')">
-          <div class="sb-icon">♻️</div><span class="sb-label">Récupérable</span><span class="sb-sub">TVA déductible</span>
-        </div>
-
-      </div>
-    </div>
-    <button class="btn-save recup" id="btn-save" onclick="saveTicket()">✓ Enregistrer le ticket</button>
+    <button class="btn-save" id="btn-save" onclick="saveTicket()">✓ Enregistrer le ticket</button>
   </div>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
   <img id="lightbox-img" src="" alt="Ticket">
 </div>
 
-<!-- VUE PDF -->
 <div id="print-view">
   <div class="pv-toolbar">
     <h2 id="pv-title">Rapport TVA</h2>
@@ -476,16 +368,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-he
 const SUPABASE_URL='https://dpdfuoguxcsihturvlbo.supabase.co';
 const SUPABASE_KEY='sb_publishable_1Sdl2WbHQ4AOenJKnW9Rfw_qP_Sx_D0';
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-
 const MONTHS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-let tickets=[], selectedSection='recup', currentPhotoData=null, selectedYear=null, currentUser=null;
+let tickets=[], currentPhotoData=null, selectedYear=null, currentUser=null;
 
 function fmt(n){return(n||0).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800)}
 function showLoading(txt='Chargement…'){document.getElementById('loading-text').textContent=txt;document.getElementById('loading-overlay').classList.add('open')}
 function hideLoading(){document.getElementById('loading-overlay').classList.remove('open')}
 
-// ─── AUTH ───
+// AUTH
 let loginMode='login';
 function switchLoginTab(mode,el){
   loginMode=mode;
@@ -494,7 +385,6 @@ function switchLoginTab(mode,el){
   document.getElementById('login-btn').textContent=mode==='login'?'Se connecter':'Créer mon compte';
   document.getElementById('login-error').classList.remove('show');
 }
-
 async function handleAuth(){
   const email=document.getElementById('login-email').value.trim();
   const password=document.getElementById('login-password').value;
@@ -514,57 +404,40 @@ async function handleAuth(){
   }
   onLogin(data.user);
 }
-
 async function logout(){
   await sb.auth.signOut();
   currentUser=null;tickets=[];
   document.getElementById('login-screen').classList.add('open');
-  document.getElementById('login-email').value='';
-  document.getElementById('login-password').value='';
 }
-
 async function onLogin(user){
   currentUser=user;
   document.getElementById('login-screen').classList.remove('open');
   await loadTickets();
 }
 
-// ─── SUPABASE DATA ───
+// SUPABASE
 async function loadTickets(){
-  showLoading('Chargement des tickets…');
+  showLoading('Chargement…');
   const{data,error}=await sb.from('tickets').select('*').eq('user_id',currentUser.id).order('date',{ascending:false});
   hideLoading();
-  if(error){showToast('Erreur chargement : '+error.message);return}
+  if(error){showToast('Erreur : '+error.message);return}
   tickets=data||[];
-  // La photo est stockée en base64 directement
-  tickets.forEach(t=>{ t.signed_url=t.photo_url; });
+  tickets.forEach(t=>{t.signed_url=t.photo_url});
   selectedYear=getYears()[0];
   renderAll();
 }
-
 async function saveTicketToDB(ticket){
   const{data,error}=await sb.from('tickets').insert([ticket]).select().single();
   if(error){showToast('Erreur sauvegarde : '+error.message);return null}
   return data;
 }
-
 async function deleteTicketFromDB(id){
   const{error}=await sb.from('tickets').delete().eq('id',id).eq('user_id',currentUser.id);
-  if(error){showToast('Erreur suppression : '+error.message);return false}
+  if(error){showToast('Erreur : '+error.message);return false}
   return true;
 }
 
-async function uploadPhoto(base64,ticketId){
-  // Stocker directement le base64 dans la DB — pas de problème CORS ni URL signée
-  return base64;
-}
-
-function getSignedUrl(path){
-  // base64 déjà disponible directement
-  return path;
-}
-
-// ─── PAGES ───
+// PAGES
 function showPage(p,el){
   document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(x=>x.classList.remove('active'));
@@ -574,51 +447,78 @@ function showPage(p,el){
   if(p==='settings')renderSettings();
 }
 
-// ─── ANNÉES ───
+// ANNÉES
 function getYears(){
   const y=[...new Set(tickets.map(t=>new Date(t.date+'T00:00:00').getFullYear()))].sort().reverse();
   if(!y.length||!y.includes(new Date().getFullYear()))y.unshift(new Date().getFullYear());
   return y;
 }
 
-function renderYearTabs(){
-  const years=getYears();
-  if(!selectedYear||!years.includes(selectedYear))selectedYear=years[0];
-  const ytEl=document.getElementById('year-tabs-tickets');if(!ytEl)return;
-  ytEl.innerHTML=years.map(y=>
-    `<button class="year-tab${y===selectedYear?' active':''}" onclick="selectYear(${y})">${y}</button>`
-  ).join('');
+// PARAMÈTRES
+const ALL_FIELDS=[
+  {id:'categorie',icon:'🏷️',name:'Catégorie',desc:'Carburant, repas, matériaux, outillage...'},
+  {id:'mode_paiement',icon:'💳',name:'Mode de paiement',desc:'CB, espèces, virement...'},
+  {id:'chantier',icon:'🏗️',name:'Chantier / Projet',desc:'Nom du chantier ou projet'},
+  {id:'salarie',icon:'👤',name:'Salarié',desc:'Nom du salarié'},
+  {id:'immatriculation',icon:'🚗',name:'Immatriculation',desc:'Plaque du véhicule'},
+  {id:'kilometrage',icon:'📏',name:'Kilométrage',desc:'Kilométrage au moment de la dépense'},
+  {id:'litres_gasoil',icon:'⛽',name:'Litres de gasoil',desc:'Quantité de carburant en litres'},
+  {id:'numero_ticket',icon:'🔢',name:'Numéro de ticket',desc:'Référence ou numéro du ticket'},
+];
+let userSettings={};
+
+function loadSettings(){
+  try{userSettings=JSON.parse(localStorage.getItem('tvatrack_settings')||'{}')}catch(e){userSettings={}}
+  ALL_FIELDS.forEach(f=>{if(userSettings[f.id]===undefined)userSettings[f.id]=false});
+}
+function saveSettings(){
+  ALL_FIELDS.forEach(f=>{const el=document.getElementById('setting_'+f.id);if(el)userSettings[f.id]=el.checked});
+  localStorage.setItem('tvatrack_settings',JSON.stringify(userSettings));
+  showPage('tickets');
+  showToast('✅ Paramètres enregistrés !');
+}
+function renderSettings(){
+  const container=document.getElementById('settings-fields');
+  if(!container)return;
+  container.innerHTML=ALL_FIELDS.map(f=>`
+    <div class="settings-field">
+      <div class="settings-field-left">
+        <div class="settings-field-icon">${f.icon}</div>
+        <div><div class="settings-field-name">${f.name}</div><div class="settings-field-desc">${f.desc}</div></div>
+      </div>
+      <label class="toggle-switch">
+        <input type="checkbox" id="setting_${f.id}" ${userSettings[f.id]?'checked':''}>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>`).join('');
 }
 
-function selectYear(y){selectedYear=y;renderYearTabs();renderColumn('recup');renderStats()}
-
-// ─── MODAL / CAMERA ───
-function triggerCamera(){
-  resetModal();
-  document.getElementById('photo-input').click();
-}
+// CHAMPS EXTRA
+const FIELD_LABELS={categorie:'Catégorie',mode_paiement:'Paiement',chantier:'Chantier',salarie:'Salarié',immatriculation:'Immat.',kilometrage:'Km',litres_gasoil:'Litres',numero_ticket:'N°'};
+const FIELD_PLACEHOLDERS={categorie:'Carburant, Repas...',mode_paiement:'CB, Espèces...',chantier:'Nom du chantier',salarie:'Nom du salarié',immatriculation:'AB-123-CD',kilometrage:'45230',litres_gasoil:'52.3',numero_ticket:'Référence'};
 
 function renderExtraFields(){
   const container=document.getElementById('extra-fields');
   if(!container)return;
-  const fieldLabels={
-    categorie:{label:'Catégorie',placeholder:'Carburant, Repas...'},
-    mode_paiement:{label:'Mode de paiement',placeholder:'CB, Espèces...'},
-    chantier:{label:'Chantier / Projet',placeholder:'Nom du chantier'},
-    salarie:{label:'Salarié',placeholder:'Nom du salarié'},
-    immatriculation:{label:'Immatriculation',placeholder:'AB-123-CD'},
-    kilometrage:{label:'Kilométrage',placeholder:'Ex: 45230'},
-    litres_gasoil:{label:'Litres de gasoil',placeholder:'Ex: 52.3'},
-    numero_ticket:{label:'Numéro de ticket',placeholder:'Référence'},
-  };
-  container.innerHTML=Object.keys(fieldLabels).filter(k=>userSettings[k]).map(k=>`
-    <div class="mfield">
-      <label>${fieldLabels[k].label}</label>
-      <input type="text" id="f-${k}" placeholder="${fieldLabels[k].placeholder}">
-    </div>
-  `).join('');
+  const active=ALL_FIELDS.filter(f=>userSettings[f.id]);
+  if(!active.length){container.innerHTML='';return}
+  // Afficher par paires
+  let html='';
+  for(let i=0;i<active.length;i+=2){
+    if(active[i+1]){
+      html+=`<div class="mrow">
+        <div class="mfield"><label>${FIELD_LABELS[active[i].id]}</label><input type="text" id="f-${active[i].id}" placeholder="${FIELD_PLACEHOLDERS[active[i].id]}"></div>
+        <div class="mfield"><label>${FIELD_LABELS[active[i+1].id]}</label><input type="text" id="f-${active[i+1].id}" placeholder="${FIELD_PLACEHOLDERS[active[i+1].id]}"></div>
+      </div>`;
+    } else {
+      html+=`<div class="mfield"><label>${FIELD_LABELS[active[i].id]}</label><input type="text" id="f-${active[i].id}" placeholder="${FIELD_PLACEHOLDERS[active[i].id]}"></div>`;
+    }
+  }
+  container.innerHTML=html;
 }
 
+// MODAL
+function triggerCamera(){resetModal();document.getElementById('photo-input').click()}
 function resetModal(){
   document.getElementById('f-date').value=new Date().toISOString().split('T')[0];
   ['f-desc','f-ht','f-tva-rate','f-tva-montant'].forEach(id=>{
@@ -632,35 +532,28 @@ function resetModal(){
   document.getElementById('ai-analyzing').classList.remove('visible');
   document.getElementById('ai-result').classList.remove('visible');
   currentPhotoData=null;
-  selectSection('recup');
 }
-
 function closeModal(){document.getElementById('modal-bg').classList.remove('open')}
 function closeModalBg(e){if(e.target===document.getElementById('modal-bg'))closeModal()}
 
-// ─── PHOTO → COMPRESSION → IA ───
+// PHOTO → IA
 function onPhotoChange(e){
-  const file=e.target.files[0];
-  if(!file)return;
+  const file=e.target.files[0];if(!file)return;
   const reader=new FileReader();
   reader.onload=ev=>{
     document.getElementById('modal-bg').classList.add('open');
-    const preview=document.getElementById('photo-preview');
-    preview.src=ev.target.result;
-    preview.style.display='block';
+    document.getElementById('photo-preview').src=ev.target.result;
+    document.getElementById('photo-preview').style.display='block';
     document.getElementById('pz-placeholder').style.display='none';
     compressAndAnalyze(ev.target.result);
   };
   reader.readAsDataURL(file);
 }
-
 function compressAndAnalyze(dataUrl){
   const img=new Image();
   img.onload=()=>{
-    const MAX=900;
-    let w=img.width,h=img.height;
-    if(w>h&&w>MAX){h=Math.round(h*MAX/w);w=MAX}
-    else if(h>MAX){w=Math.round(w*MAX/h);h=MAX}
+    const MAX=900;let w=img.width,h=img.height;
+    if(w>h&&w>MAX){h=Math.round(h*MAX/w);w=MAX}else if(h>MAX){w=Math.round(w*MAX/h);h=MAX}
     const canvas=document.createElement('canvas');
     canvas.width=w;canvas.height=h;
     canvas.getContext('2d').drawImage(img,0,0,w,h);
@@ -675,32 +568,30 @@ async function analyzeWithAI(base64Image){
   document.getElementById('ai-analyzing').classList.add('visible');
   document.getElementById('ai-result').classList.remove('visible');
   const base64Data=base64Image.split(',')[1];
-  // Construire le prompt dynamique selon les paramètres activés
-  const extraFields = [];
-  const fieldDefs = {
-    categorie: 'categorie (ex: Carburant, Repas, Materiaux, Peage, Outillage)',
-    mode_paiement: 'mode_paiement (ex: CB, Especes, Virement)',
-    chantier: 'chantier (nom du chantier ou projet)',
-    salarie: 'salarie (nom du salarie)',
-    immatriculation: 'immatriculation (plaque du vehicule ex: AB-123-CD)',
-    kilometrage: 'kilometrage (nombre entier de km)',
-    litres_gasoil: 'litres_gasoil (quantite de carburant en litres, nombre decimal)',
-    numero_ticket: 'numero_ticket (reference ou numero du ticket)',
-  };
-  Object.keys(fieldDefs).forEach(k => {
-    if(userSettings[k]) extraFields.push('"'+k+'":'+fieldDefs[k]+' ou null');
-  });
-  const extraJSON = extraFields.length ? ','+extraFields.join(',') : '';
-  const extraExplain = extraFields.length ? 'Extrais aussi les champs supplémentaires demandés.' : '';
 
-  const prompt=`Tu es un expert comptable français. Analyse cette image de ticket de caisse ou facture et extrais les données fiscales.
+  // Prompt dynamique selon paramètres activés
+  const activeFields=ALL_FIELDS.filter(f=>userSettings[f.id]);
+  const fieldDefs={
+    categorie:'"categorie":"type de depense (Carburant/Repas/Materiaux/Peage/Outillage/etc) ou null"',
+    mode_paiement:'"mode_paiement":"CB ou Especes ou Virement ou null"',
+    chantier:'"chantier":"nom du chantier ou projet ou null"',
+    salarie:'"salarie":"nom du salarie ou null"',
+    immatriculation:'"immatriculation":"plaque vehicule format XX-000-XX ou null"',
+    kilometrage:'"kilometrage":nombre entier ou null',
+    litres_gasoil:'"litres_gasoil":nombre decimal ou null',
+    numero_ticket:'"numero_ticket":"reference ou numero du ticket ou null"',
+  };
+  const extraJSON=activeFields.map(f=>fieldDefs[f.id]).join(',');
+  const extraNote=activeFields.length?'Extrais aussi : '+activeFields.map(f=>f.name).join(', ')+'.':'';
+
+  const prompt=`Tu es un expert comptable français. Analyse cette image de ticket de caisse ou facture.
 Réponds UNIQUEMENT en JSON valide, sans texte avant ni après, sans backticks :
-{"fournisseur":"nom fournisseur ou type dépense","date":"YYYY-MM-DD ou null","montant_ht":nombre ou null,"taux_tva":20 ou 10 ou 5.5 ou 0 ou null,"montant_tva":nombre ou null,"montant_ttc":nombre ou null,"confiance":"high" ou "medium" ou "low"${extraJSON.replace(/"/g, '\"')}}
-Règles: si montant_tva absent mais HT et TTC présents, calcule montant_tva=TTC-HT. Si seulement TTC et taux, calcule HT=TTC/(1+taux/100) et TVA=TTC-HT. Mets null si illisible. ${extraExplain}`;
+{"fournisseur":"nom ou type","date":"YYYY-MM-DD ou null","montant_ht":nombre ou null,"taux_tva":20 ou 10 ou 5.5 ou 0 ou null,"montant_tva":nombre ou null,"montant_ttc":nombre ou null,"confiance":"high" ou "medium" ou "low"${activeFields.length?','+extraJSON:''}}
+Règles: si montant_tva absent et HT+TTC présents: montant_tva=TTC-HT. Si TTC+taux seulement: HT=TTC/(1+taux/100), TVA=TTC-HT. Mets null si illisible. ${extraNote}`;
+
   try{
     const response=await fetch('/api/analyze',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
+      method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({messages:[{role:'user',content:[
         {type:'image',source:{type:'base64',media_type:'image/jpeg',data:base64Data}},
         {type:'text',text:prompt}
@@ -713,39 +604,26 @@ Règles: si montant_tva absent mais HT et TTC présents, calcule montant_tva=TTC
   }catch(err){
     document.getElementById('ai-analyzing').classList.remove('visible');
     const r=document.getElementById('ai-result');
-    r.classList.add('visible');
-    r.style.cssText='background:#FEF3C7;border-color:#FDE68A;color:#92400E';
+    r.classList.add('visible');r.style.cssText='background:#FEF3C7;border-color:#FDE68A;color:#92400E';
     document.getElementById('ai-result-text').textContent='⚠️ Lecture impossible — remplissez manuellement';
   }
 }
 
 function fillFromAI(data){
   document.getElementById('ai-analyzing').classList.remove('visible');
-  const set=(id,val)=>{
-    const el=document.getElementById(id);
-    if(el&&val!==null&&val!==undefined&&val!==''){el.value=val;el.classList.add('ai-filled')}
-  };
+  const set=(id,val)=>{const el=document.getElementById(id);if(el&&val!==null&&val!==undefined&&val!==''){el.value=val;el.classList.add('ai-filled')}};
   set('f-desc',data.fournisseur);
   if(data.date)set('f-date',data.date);
-  if(data.montant_ht!==null)set('f-ht',parseFloat(data.montant_ht).toFixed(2));
-  if(data.taux_tva!==null)set('f-tva-rate',data.taux_tva);
-  if(data.montant_tva!==null)set('f-tva-montant',parseFloat(data.montant_tva).toFixed(2));
-  // Champs supplémentaires
-  ['categorie','mode_paiement','chantier','salarie','immatriculation','kilometrage','litres_gasoil','numero_ticket'].forEach(k=>{
-    if(data[k]!==undefined&&data[k]!==null) set('f-'+k, data[k]);
-  });
+  if(data.montant_ht!==null&&data.montant_ht!==undefined)set('f-ht',parseFloat(data.montant_ht).toFixed(2));
+  if(data.taux_tva!==null&&data.taux_tva!==undefined)set('f-tva-rate',data.taux_tva);
+  if(data.montant_tva!==null&&data.montant_tva!==undefined)set('f-tva-montant',parseFloat(data.montant_tva).toFixed(2));
+  ALL_FIELDS.forEach(f=>{if(data[f.id]!==undefined&&data[f.id]!==null)set('f-'+f.id,data[f.id])});
   const r=document.getElementById('ai-result');
   r.classList.add('visible');r.style.cssText='';
   const conf=data.confiance||'medium';
   const labels={high:'✅ Données extraites',medium:'⚠️ Lecture partielle',low:'❓ Peu lisible'};
   const tagLabels={high:'Fiable',medium:'À vérifier',low:'Incertain'};
-  document.getElementById('ai-result-text').innerHTML=`${labels[conf]} — <span class="confidence-tag ${conf}">${tagLabels[conf]}</span> Vérifiez et corrigez si besoin.`;
-}
-
-function selectSection(s){
-  selectedSection='recup';
-  const btn=document.getElementById('btn-save');
-  if(btn){btn.className='btn-save recup';btn.textContent='✓ Enregistrer le ticket';}
+  document.getElementById('ai-result-text').innerHTML=`${labels[conf]} — <span class="confidence-tag ${conf}">${tagLabels[conf]}</span> Vérifiez si besoin.`;
 }
 
 async function saveTicket(){
@@ -756,74 +634,46 @@ async function saveTicket(){
   let tva=parseFloat(document.getElementById('f-tva-montant').value);
   if(isNaN(tva))tva=ht*tvaRate/100;
   if(!date){showToast('⚠️ Veuillez saisir une date');return}
-
-  showLoading('Enregistrement…');
-  closeModal();
-
-  // Collecter les champs supplémentaires
+  showLoading('Enregistrement…');closeModal();
   const extraData={};
-  ['categorie','mode_paiement','chantier','salarie','immatriculation','kilometrage','litres_gasoil','numero_ticket'].forEach(k=>{
-    const el=document.getElementById('f-'+k);
-    if(el&&el.value.trim())extraData[k]=el.value.trim();
-  });
-
+  ALL_FIELDS.forEach(f=>{const el=document.getElementById('f-'+f.id);if(el&&el.value.trim())extraData[f.id]=el.value.trim()});
   const ticketData={
-    user_id:currentUser.id,
-    description:desc,date,ht,tva,
-    tva_rate:tvaRate,
-    section:selectedSection,
-    photo_url:null,
+    user_id:currentUser.id,description:desc,date,ht,tva,tva_rate:tvaRate,
+    section:'recup',photo_url:null,
     extra_data:Object.keys(extraData).length?JSON.stringify(extraData):null
   };
-
   const saved=await saveTicketToDB(ticketData);
   if(!saved){hideLoading();return}
-
-  // Upload photo si présente
   if(currentPhotoData){
-    const photoUrl=await uploadPhoto(currentPhotoData,saved.id);
-    if(photoUrl){
-      await sb.from('tickets').update({photo_url:photoUrl}).eq('id',saved.id);
-      saved.photo_url=photoUrl;
-      saved.signed_url=photoUrl;
-    }
+    const photoUrl=currentPhotoData;
+    await sb.from('tickets').update({photo_url:photoUrl}).eq('id',saved.id);
+    saved.photo_url=photoUrl;saved.signed_url=photoUrl;
   }
-
   hideLoading();
   tickets.unshift(saved);
   selectedYear=new Date(date+'T00:00:00').getFullYear();
-  renderAll();
-  showToast('✅ Ticket enregistré !');
+  renderAll();showToast('✅ Ticket enregistré !');
 }
 
 async function deleteTicket(id){
   if(!confirm('Supprimer ce ticket ?'))return;
   showLoading('Suppression…');
   const ok=await deleteTicketFromDB(id);
-  hideLoading();
-  if(!ok)return;
+  hideLoading();if(!ok)return;
   tickets=tickets.filter(t=>t.id!==id);
-  renderAll();
-  showToast('🗑️ Supprimé');
+  renderAll();showToast('🗑️ Supprimé');
 }
 
-// ─── RENDER ───
-function renderAll(){
-  renderYearTabs();
-  renderColumn('recup');
-  renderStats();
-}
+// RENDER
+function renderAll(){renderTickets();renderStats()}
 
-function renderColumn(section){
-  const col=document.getElementById('col-'+section);
-  const empty=document.getElementById('empty-'+section);
-  const badge=document.getElementById('badge-'+section);
-  if(!col||!empty||!badge)return;
-  const filtered=tickets.filter(t=>{
-    const y=new Date(t.date+'T00:00:00').getFullYear();
-    return t.section===section&&y===selectedYear;
-  });
-  badge.textContent=tickets.filter(t=>t.section===section).length;
+function renderTickets(){
+  const col=document.getElementById('col-tickets');
+  const empty=document.getElementById('empty-tickets');
+  const badge=document.getElementById('badge-tickets');
+  if(!col)return;
+  const filtered=tickets.filter(t=>new Date(t.date+'T00:00:00').getFullYear()===selectedYear);
+  badge.textContent=tickets.length;
   col.querySelectorAll('.month-group').forEach(el=>el.remove());
   if(filtered.length===0){empty.style.display='block';return}
   empty.style.display='none';
@@ -831,8 +681,7 @@ function renderColumn(section){
   filtered.forEach(t=>{
     const d=new Date(t.date+'T00:00:00');
     const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-    if(!groups[key])groups[key]=[];
-    groups[key].push(t);
+    if(!groups[key])groups[key]=[];groups[key].push(t);
   });
   Object.keys(groups).sort().reverse().forEach(key=>{
     const[year,month]=key.split('-');
@@ -842,45 +691,43 @@ function renderColumn(section){
     const grp=document.createElement('div');
     grp.className='month-group';
     grp.innerHTML=`
-      <button class="month-toggle ${section} open" onclick="toggleMonth(this)">
+      <button class="month-toggle open" onclick="toggleMonth(this)">
         <span class="m-left"><span class="m-dot"></span><span>${monthName}</span>
           <span class="m-count">${grpTickets.length} ticket${grpTickets.length>1?'s':''}</span></span>
         <span class="m-right">
-          <span class="m-total">${fmt(total)} €</span>
+          <span class="m-total">${fmt(total)} € TVA</span>
           <button class="btn-month-pdf" onclick="event.stopPropagation();generateMonthPDF('${key}')">📄 PDF</button>
           <span class="m-arrow">▼</span>
         </span>
       </button>
       <div class="month-tickets open">
-        ${grpTickets.sort((a,b)=>b.date.localeCompare(a.date)).map(t=>ticketHTML(t,section)).join('')}
+        ${grpTickets.sort((a,b)=>b.date.localeCompare(a.date)).map(t=>ticketHTML(t)).join('')}
       </div>`;
     col.appendChild(grp);
   });
 }
 
-function ticketHTML(t,section){
+function ticketHTML(t){
   const imgEl=t.photo_url
-    ?`<img class="ticket-thumb" src="${t.signed_url}" onclick="openLightbox('${t.signed_url}')" alt="ticket">`
+    ?`<img class="ticket-thumb" src="${t.signed_url}" onclick="openLightbox('${t.signed_url}')" alt="">`
     :`<div class="ticket-thumb-placeholder">🧾</div>`;
   const dateStr=new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR');
-  // Champs extra
   let extra='';
   if(t.extra_data){
     try{
       const ex=JSON.parse(t.extra_data);
-      const labels={categorie:'Cat.',mode_paiement:'Paiem.',chantier:'Chantier',salarie:'Salarié',immatriculation:'Immat.',kilometrage:'Km',litres_gasoil:'Litres',numero_ticket:'N°'};
-      extra=Object.keys(ex).map(k=>`<span style="margin-right:6px">${labels[k]||k}: <strong>${ex[k]}</strong></span>`).join('');
+      extra=Object.keys(ex).map(k=>`<strong>${FIELD_LABELS[k]||k}:</strong> ${ex[k]}`).join(' · ');
     }catch(e){}
   }
-  return`<div class="ticket-card ${section}">
+  return`<div class="ticket-card">
     <button class="ticket-del" onclick="deleteTicket('${t.id}')">🗑</button>
     ${imgEl}
     <div class="ticket-info">
       <div class="t-desc">${t.description}</div>
       <div class="t-meta">${dateStr}${t.tva_rate?' · TVA '+t.tva_rate+'%':''}</div>
-      ${extra?`<div class="t-meta" style="margin-top:3px">${extra}</div>`:''}
+      ${extra?`<div class="t-meta" style="margin-top:2px;flex-wrap:wrap">${extra}</div>`:''}
     </div>
-    <div class="ticket-amounts ${section}">
+    <div class="ticket-amounts">
       <div class="t-ht">${fmt(t.ht)} € HT</div>
       <div class="t-tva">${fmt(t.tva)} € TVA</div>
     </div>
@@ -890,12 +737,13 @@ function ticketHTML(t,section){
 function toggleMonth(btn){btn.classList.toggle('open');btn.nextElementSibling.classList.toggle('open')}
 
 function renderStats(){
-  const sr=document.getElementById('stat-recup');if(sr)sr.textContent=fmt(tickets.filter(t=>t.section==='recup').reduce((s,t)=>s+t.tva,0))+' €';
-  const sd=document.getElementById('stat-due');if(sd)sd.textContent=fmt(tickets.filter(t=>t.section==='due').reduce((s,t)=>s+t.tva,0))+' €';
-  const sc=document.getElementById('stat-count');if(sc)sc.textContent=tickets.length;
+  const totalTVA=tickets.reduce((s,t)=>s+t.tva,0);
+  const el=document.getElementById('ra-tva');if(el)el.textContent=fmt(totalTVA)+' €';
+  const sc=document.getElementById('ra-tickets');if(sc)sc.textContent=tickets.length;
+  const b=document.getElementById('badge-tickets');if(b)b.textContent=tickets.length;
 }
 
-// ─── RECAP ───
+// RECAP
 function renderRecap(){
   const years=getYears();
   const sel=document.getElementById('recap-year');
@@ -903,46 +751,31 @@ function renderRecap(){
   sel.innerHTML=years.map(y=>`<option value="${y}"${String(y)===cur?' selected':''}>${y}</option>`).join('');
   const year=parseInt(sel.value);
   const yt=tickets.filter(t=>new Date(t.date+'T00:00:00').getFullYear()===year);
-  document.getElementById('ra-recup').textContent=fmt(yt.filter(t=>t.section==='recup').reduce((s,t)=>s+t.tva,0))+' €';
-  
+  const totalTVA=yt.reduce((s,t)=>s+t.tva,0);
+  document.getElementById('ra-tva').textContent=fmt(totalTVA)+' €';
   document.getElementById('ra-tickets').textContent=yt.length;
   const tbody=document.getElementById('recap-tbody');
   const tfoot=document.getElementById('recap-tfoot');
-  if(yt.length===0){tbody.innerHTML=`<tr><td colspan="6" style="padding:28px;text-align:center;color:var(--muted)">Aucun ticket pour ${year}</td></tr>`;tfoot.innerHTML='';return}
+  if(!yt.length){tbody.innerHTML=`<tr><td colspan="5" style="padding:28px;text-align:center;color:var(--muted)">Aucun ticket pour ${year}</td></tr>`;tfoot.innerHTML='';return}
   const md={};
-  for(let m=0;m<12;m++)md[m]={n:0,ht:0,recup:0,due:0};
-  yt.forEach(t=>{const m=new Date(t.date+'T00:00:00').getMonth();md[m].n++;md[m].ht+=t.ht;md[m].recup+=t.tva});
-  let rows='',totN=0,totHT=0,totR=0;
+  for(let m=0;m<12;m++)md[m]={n:0,ht:0,tva:0};
+  yt.forEach(t=>{const m=new Date(t.date+'T00:00:00').getMonth();md[m].n++;md[m].ht+=t.ht;md[m].tva+=t.tva});
+  let rows='',totN=0,totHT=0,totT=0;
   for(let m=0;m<12;m++){
     if(!md[m].n)continue;
-    totN+=md[m].n;totHT+=md[m].ht;totR+=md[m].recup;
+    totN+=md[m].n;totHT+=md[m].ht;totT+=md[m].tva;
     const key=`${year}-${String(m+1).padStart(2,'0')}`;
     rows+=`<tr>
       <td class="month-name">${MONTHS[m]}</td><td>${md[m].n}</td>
-      <td>${fmt(md[m].ht)} €</td><td class="recup">${fmt(md[m].recup)} €</td>
-      <td class="due">${fmt(md[m].due)} €</td>
+      <td>${fmt(md[m].ht)} €</td><td class="tva-col">${fmt(md[m].tva)} €</td>
       <td class="pdf-cell"><button class="btn-month-pdf" onclick="generateMonthPDF('${key}')">📄</button></td>
     </tr>`;
   }
   tbody.innerHTML=rows;
-  tfoot.innerHTML=`<tr><td>Total ${year}</td><td>${totN}</td><td>${fmt(totHT)} €</td><td class="recup">${fmt(totR)} €</td><td></td></tr>`;
+  tfoot.innerHTML=`<tr><td>Total ${year}</td><td>${totN}</td><td>${fmt(totHT)} €</td><td style="color:var(--recup)">${fmt(totT)} €</td><td></td></tr>`;
 }
 
-// ─── CONVERTIR IMAGE URL EN BASE64 ───
-async function urlToBase64(url){
-  try{
-    const res=await fetch(url);
-    const blob=await res.blob();
-    return new Promise(resolve=>{
-      const reader=new FileReader();
-      reader.onload=()=>resolve(reader.result);
-      reader.onerror=()=>resolve(null);
-      reader.readAsDataURL(blob);
-    });
-  }catch(e){return null}
-}
-
-// ─── PDF MOIS ───
+// PDF MOIS
 async function generateMonthPDF(key){
   const[year,month]=key.split('-');
   const monthName=MONTHS[parseInt(month)-1]+' '+year;
@@ -951,43 +784,38 @@ async function generateMonthPDF(key){
     return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`===key;
   }).sort((a,b)=>a.date.localeCompare(b.date));
   if(!concerned.length){showToast('Aucun ticket pour ce mois');return}
-
   showLoading('Préparation du PDF…');
-
-  // Convertir toutes les photos en base64
-  const photosBase64={};
-  await Promise.all(concerned.map(async t=>{
-    if(t.photo_url){
-      const b64=await urlToBase64(t.photo_url);
-      if(b64)photosBase64[t.id]=b64;
-    }
-  }));
-
-  hideLoading();
-
-  const totRecup=concerned.filter(t=>t.section==='recup').reduce((s,t)=>s+t.tva,0);
-  const totDue=concerned.filter(t=>t.section==='due').reduce((s,t)=>s+t.tva,0);
+  const totTVA=concerned.reduce((s,t)=>s+t.tva,0);
   const totHT=concerned.reduce((s,t)=>s+t.ht,0);
   const totTTC=concerned.reduce((s,t)=>s+t.ht+t.tva,0);
   const photosHTML=concerned.map(t=>`
-    <div class="rpt-photo-item ${t.section}">
-      ${photosBase64[t.id]?`<img src="${photosBase64[t.id]}" alt="ticket">`:`<div class="rpt-photo-noimg">🧾</div>`}
+    <div class="rpt-photo-item">
+      ${t.photo_url?`<img src="${t.signed_url}" alt="">`:`<div class="rpt-photo-noimg">🧾</div>`}
       <div class="rpt-photo-meta">
         <div class="rpt-photo-desc">${t.description}</div>
         <div>${new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR')}</div>
         <div class="rpt-photo-tva">TVA : ${fmt(t.tva)} €</div>
-        <span class="tag ${t.section}">${t.section==='recup'?'TVA':'Due'}</span>
+        ${t.extra_data?`<div class="rpt-extra">${Object.entries(JSON.parse(t.extra_data||'{}')).map(([k,v])=>`${FIELD_LABELS[k]||k}: ${v}`).join(' · ')}</div>`:''}
       </div>
     </div>`).join('');
-  const rowsHTML=concerned.map(t=>`
-    <tr class="${t.section}-row">
+  const rowsHTML=concerned.map(t=>{
+    let extraCols='';
+    const activeExtra=ALL_FIELDS.filter(f=>userSettings[f.id]);
+    if(activeExtra.length&&t.extra_data){
+      try{const ex=JSON.parse(t.extra_data);extraCols=activeExtra.map(f=>`<td>${ex[f.id]||'—'}</td>`).join('');}catch(e){}
+    }
+    return`<tr>
       <td>${new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR')}</td>
       <td><strong>${t.description}</strong></td>
-      <td><span class="tag ${t.section}">${t.section==='recup'?'Récupérable':'Due à l\'État'}</span></td>
       <td>${fmt(t.ht)} €</td><td>${t.tva_rate?t.tva_rate+'%':'—'}</td>
       <td><strong>${fmt(t.tva)} €</strong></td><td>${fmt(t.ht+t.tva)} €</td>
-    </tr>`).join('');
+      ${extraCols}
+    </tr>`;
+  }).join('');
+  const activeExtra=ALL_FIELDS.filter(f=>userSettings[f.id]);
+  const extraHeaders=activeExtra.map(f=>`<th>${f.name}</th>`).join('');
   const now=new Date().toLocaleDateString('fr-FR');
+  hideLoading();
   document.getElementById('pv-title').textContent=`Dossier ${monthName}`;
   document.getElementById('pv-content').innerHTML=`
     <div class="rpt-header">
@@ -995,38 +823,39 @@ async function generateMonthPDF(key){
       <div class="rpt-meta"><strong>Dossier TVA — ${monthName}</strong>Édité le ${now} · ${concerned.length} tickets</div>
     </div>
     <div class="rpt-summary">
-      <div class="rpt-sum-box recup"><div class="sv">${fmt(totRecup)} €</div><div class="sl">TVA</div></div>
-      <div class="rpt-sum-box due"><div class="sv">${fmt(totDue)} €</div><div class="sl">TVA</div></div>
+      <div class="rpt-sum-box tva"><div class="sv">${fmt(totTVA)} €</div><div class="sl">Total TVA</div></div>
       <div class="rpt-sum-box total"><div class="sv">${fmt(totHT)} €</div><div class="sl">Total HT</div></div>
     </div>
-    <div style="margin-bottom:16px"><div class="rpt-photos-title">📷 Photos des tickets — ${monthName}</div>
-    <div class="rpt-photos-grid">${photosHTML}</div></div>
-    <div><div class="rpt-photos-title">📋 Détail des tickets</div>
-    <table class="rpt-tickets-table">
-      <thead><tr><th>Date</th><th>Description</th><th>Section</th><th>HT</th><th>TVA%</th><th>TVA €</th><th>TTC</th></tr></thead>
-      <tbody>${rowsHTML}</tbody>
-    </table>
-    <div class="rpt-month-total-bar">
-      <span>HT : <strong>${fmt(totHT)} €</strong></span>
-      <span class="mt-recup">TVA : <strong>${fmt(totRecup)} €</strong></span>
-      <span class="mt-due">Due : <strong>${fmt(totDue)} €</strong></span>
-      <span>TTC : <strong>${fmt(totTTC)} €</strong></span>
-    </div></div>
+    <div style="margin-bottom:16px">
+      <div class="rpt-photos-title">📷 Photos des tickets — ${monthName}</div>
+      <div class="rpt-photos-grid">${photosHTML}</div>
+    </div>
+    <div>
+      <div class="rpt-photos-title">📋 Détail des tickets</div>
+      <table class="rpt-tickets-table">
+        <thead><tr><th>Date</th><th>Description</th><th>HT</th><th>TVA%</th><th>TVA €</th><th>TTC</th>${extraHeaders}</tr></thead>
+        <tbody>${rowsHTML}</tbody>
+      </table>
+      <div class="rpt-month-total-bar">
+        <span>HT : <strong>${fmt(totHT)} €</strong></span>
+        <span class="mt-tva">TVA : <strong>${fmt(totTVA)} €</strong></span>
+        <span>TTC : <strong>${fmt(totTTC)} €</strong></span>
+      </div>
+    </div>
     <div class="rpt-footer">TVAtrack AI · Dossier ${monthName} · Édité le ${now}</div>`;
   document.getElementById('print-view').classList.add('open');
   document.body.style.overflow='hidden';
 }
 
-// ─── PDF ANNÉE ───
+// PDF ANNÉE
 async function printYear(){
-  showLoading("Préparation du PDF annuel…");
+  showLoading('Préparation du PDF annuel…');
   await new Promise(r=>setTimeout(r,100));
   const year=parseInt(document.getElementById('recap-year').value);
   const yt=tickets.filter(t=>new Date(t.date+'T00:00:00').getFullYear()===year).sort((a,b)=>a.date.localeCompare(b.date));
   if(!yt.length){hideLoading();showToast('Aucun ticket pour '+year);return}
   hideLoading();
-  const totRecup=yt.filter(t=>t.section==='recup').reduce((s,t)=>s+t.tva,0);
-  const totDue=yt.filter(t=>t.section==='due').reduce((s,t)=>s+t.tva,0);
+  const totTVA=yt.reduce((s,t)=>s+t.tva,0);
   const totHT=yt.reduce((s,t)=>s+t.ht,0);
   const groups={};
   yt.forEach(t=>{
@@ -1037,28 +866,24 @@ async function printYear(){
   let monthsHTML='';
   Object.keys(groups).sort().forEach(key=>{
     const[y,m]=key.split('-');
-    const monthName=MONTHS[parseInt(m)-1];
     const grp=groups[key];
-    const mR=grp.filter(t=>t.section==='recup').reduce((s,t)=>s+t.tva,0);
-    const mD=grp.filter(t=>t.section==='due').reduce((s,t)=>s+t.tva,0);
+    const mTVA=grp.reduce((s,t)=>s+t.tva,0);
     const mHT=grp.reduce((s,t)=>s+t.ht,0);
-    const rows=grp.map(t=>`<tr class="${t.section}-row">
+    const rows=grp.map(t=>`<tr>
       <td>${new Date(t.date+'T00:00:00').toLocaleDateString('fr-FR')}</td>
       <td><strong>${t.description}</strong></td>
-      <td><span class="tag ${t.section}">${t.section==='recup'?'TVA':'Due'}</span></td>
       <td>${fmt(t.ht)} €</td><td>${t.tva_rate?t.tva_rate+'%':'—'}</td>
       <td><strong>${fmt(t.tva)} €</strong></td>
     </tr>`).join('');
     monthsHTML+=`<div style="margin-bottom:24px;page-break-inside:avoid">
-      <div class="rpt-photos-title">${monthName} ${y} — ${grp.length} ticket${grp.length>1?'s':''}</div>
+      <div class="rpt-photos-title">${MONTHS[parseInt(m)-1]} ${y} — ${grp.length} ticket${grp.length>1?'s':''}</div>
       <table class="rpt-tickets-table">
-        <thead><tr><th>Date</th><th>Description</th><th>Section</th><th>HT</th><th>TVA%</th><th>TVA €</th></tr></thead>
+        <thead><tr><th>Date</th><th>Description</th><th>HT</th><th>TVA%</th><th>TVA €</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
       <div class="rpt-month-total-bar">
         <span>HT : <strong>${fmt(mHT)} €</strong></span>
-        <span class="mt-recup">TVA : <strong>${fmt(mR)} €</strong></span>
-        <span class="mt-due">Due : <strong>${fmt(mD)} €</strong></span>
+        <span class="mt-tva">TVA : <strong>${fmt(mTVA)} €</strong></span>
       </div>
     </div>`;
   });
@@ -1070,8 +895,7 @@ async function printYear(){
       <div class="rpt-meta"><strong>Rapport TVA annuel ${year}</strong>Édité le ${now} · ${yt.length} tickets</div>
     </div>
     <div class="rpt-summary">
-      <div class="rpt-sum-box recup"><div class="sv">${fmt(totRecup)} €</div><div class="sl">TVA</div></div>
-      <div class="rpt-sum-box due"><div class="sv">${fmt(totDue)} €</div><div class="sl">TVA</div></div>
+      <div class="rpt-sum-box tva"><div class="sv">${fmt(totTVA)} €</div><div class="sl">Total TVA</div></div>
       <div class="rpt-sum-box total"><div class="sv">${fmt(totHT)} €</div><div class="sl">Total HT</div></div>
     </div>
     ${monthsHTML}
@@ -1082,73 +906,15 @@ async function printYear(){
 
 function closePrintView(){document.getElementById('print-view').classList.remove('open');document.body.style.overflow=''}
 
-// ─── LIGHTBOX ───
-function openLightbox(url){
-  document.getElementById('lightbox-img').src=url;
-  document.getElementById('lightbox').classList.add('open');
-}
+// LIGHTBOX
+function openLightbox(url){document.getElementById('lightbox-img').src=url;document.getElementById('lightbox').classList.add('open')}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open')}
 document.getElementById('lightbox').onclick=e=>{if(e.target===document.getElementById('lightbox'))closeLightbox()};
 
-// ─── PARAMÈTRES ───
-const ALL_FIELDS=[
-  {id:'tva_section',icon:'♻️',name:'Section TVA',desc:'TVA recup ou due',default:true},
-  {id:'categorie',icon:'🏷️',name:'Catégorie',desc:'Carburant, repas, matériaux, outillage...',default:true},
-  {id:'mode_paiement',icon:'💳',name:'Mode de paiement',desc:'CB, espèces, virement...',default:false},
-  {id:'chantier',icon:'🏗️',name:'Chantier / Projet',desc:'Nom du chantier ou projet',default:false},
-  {id:'salarie',icon:'👤',name:'Salarié',desc:'Nom du salarie',default:false},
-  {id:'immatriculation',icon:'🚗',name:'Immatriculation',desc:'Plaque du vehicule',default:false},
-  {id:'kilometrage',icon:'📏',name:'Kilométrage',desc:'Kilométrage au moment de la dépense',default:false},
-  {id:'numero_ticket',icon:'🔢',name:'Numéro de ticket',desc:'Référence ou numéro du ticket',default:false},
-  {id:'litres_gasoil',icon:'⛽',name:'Litres de gasoil',desc:'Quantité de carburant en litres',default:false},
-  {id:'litres_gasoil',icon:'⛽',name:'Litres de gasoil',desc:'Quantité de carburant en litres',default:false},
-];
-let userSettings={};
-
-function loadSettings(){
-  try{const s=localStorage.getItem('tvatrack_settings');userSettings=s?JSON.parse(s):{};
-  }catch(e){userSettings={}}
-  ALL_FIELDS.forEach(f=>{if(userSettings[f.id]===undefined)userSettings[f.id]=f.def});
-}
-
-function saveSettings(){
-  ALL_FIELDS.forEach(f=>{
-    const el=document.getElementById('setting_'+f.id);
-    if(el)userSettings[f.id]=el.checked;
-  });
-  localStorage.setItem('tvatrack_settings',JSON.stringify(userSettings));
-  showPage('tickets');
-  showToast('✅ Paramètres enregistrés !');
-}
-
-function renderSettings(){
-  const container=document.getElementById('settings-fields');
-  if(!container)return;
-  container.innerHTML=ALL_FIELDS.map(f=>`
-    <div class="settings-field">
-      <div class="settings-field-left">
-        <div class="settings-field-icon">${f.icon}</div>
-        <div>
-          <div class="settings-field-name">${f.name}</div>
-          <div class="settings-field-desc">${f.desc}</div>
-        </div>
-      </div>
-      <label class="toggle-switch">
-        <input type="checkbox" id="setting_${f.id}" ${userSettings[f.id]?'checked':''}>
-        <span class="toggle-slider"></span>
-      </label>
-    </div>
-  `).join('');
-}
-
-// ─── INIT ───
+// INIT
 loadSettings();
-sb.auth.onAuthStateChange((event,session)=>{
-  if(session?.user)onLogin(session.user);
-});
-sb.auth.getSession().then(({data:{session}})=>{
-  if(!session)document.getElementById('login-screen').classList.add('open');
-});
+sb.auth.onAuthStateChange((event,session)=>{if(session?.user)onLogin(session.user)});
+sb.auth.getSession().then(({data:{session}})=>{if(!session)document.getElementById('login-screen').classList.add('open')});
 </script>
 </body>
 </html>
