@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="80" fill="#1A1A2E"/>
+  <text x="256" y="200" text-anchor="middle" font-family="Arial Black" font-size="120" font-weight="900" fill="#FFFFFF">TVA</text>
+  <text x="256" y="320" text-anchor="middle" font-family="Arial Black" font-size="100" font-weight="900" fill="#52B788">track</text>
+  <text x="256" y="420" text-anchor="middle" font-family="Arial" font-size="60" fill="#6C3FC5">AI</text>
+</svg>
